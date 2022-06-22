@@ -130,3 +130,29 @@ def jogo():
                 posicaoY = -10
                 pontos = pontos + 1
                 velocidade = velocidade + 1
+
+            gameDisplay.blit(fogo, (posicaoX, posicaoY))
+            gameDisplay.blit(sonic, (posicaoXSonic, posicaoYSonic))
+            fonte = pygame.font.Font("freesansbold.ttf", 20)
+            texto = fonte.render("Pontos: "+str(pontos), True, white)
+            gameDisplay.blit(texto, (20, 20))
+
+            sonicRect = sonic.get_rect()
+            sonicRect.x = posicaoXSonic
+            sonicRect.y = posicaoYSonic
+
+            fogoRect = fogo.get_rect()
+            fogoRect.x = posicaoX
+            fogoRect.y = posicaoY
+
+            if sonicRect.colliderect(fogoRect):
+                jogando = False
+                dead(pontos)
+            else:
+                print(posicaoY)
+                print(posicaoX)
+
+        pygameDisplay.update()
+        clock.tick(60)
+
+jogo()
